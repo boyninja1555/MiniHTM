@@ -1,0 +1,35 @@
+{
+  "private": false,
+  "name": "@minihtm/node",
+  "version": "1.0.1",
+  "description": "Node.js port for MiniHTM",
+  "license": "MIT",
+  "author": "floormann",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./elements": {
+      "import": "./dist/elements/index.js",
+      "types": "./dist/elements/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/js-beautify": "^1.14.3",
+    "@types/node": "^24.6.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "js-beautify": "^1.15.4"
+  }
+}
