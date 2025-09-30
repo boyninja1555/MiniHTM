@@ -6,9 +6,41 @@ If you are looking for another supported language, see [this list](https://githu
 
 ## Documentation
 
-As the current only maintainer of MiniHTM, I cannot seem to write documentation very well. Instead, I will provide a few examples in JavaScript and ES modules. Keep in mind this is done with Node.js, but if using Vite, it should work? I don't really know, I tested it all in a simple Node.js module.
+### Installation
 
-**File-writing, dead simple**
+```bash
+npm install @minihtm/node # For the losers
+npm i @minihtm/node # For the winners
+```
+
+As the current only maintainer of MiniHTM, I cannot seem to write documentation very well. Instead, I will provide a few examples in JavaScript and ES modules, plus a few tips. Keep in mind this is done with Node.js, but if using Vite, it should work? I don't really know, I tested it all in a simple Node.js module.
+
+### Formatting control
+To control formatting, MiniHTM provides that option in its configuration. You can define the config like below:
+
+```javascript
+import { MiniHTM } from "@minihtm/node"
+
+MiniHTM.config({ format: true, }) // Formatting enabled
+MiniHTM.config({ format: false, }) // Formatting disabled
+MiniHTM.config({}) // Formatting enabled (default + required)
+```
+
+Keep in mind that calling `MiniHTM.config({})` is required, but defaults are available. By default, `format` is set to `true`.
+
+### Small example
+
+**Console logging**
+```javascript
+import { h1, MiniHTM } from "@minihtm/node"
+
+MiniHTM.config({})
+
+const generated = h1("Hello, world!")
+console.log(generated)
+```
+
+**File writing**
 ```javascript
 import fs from "fs"
 import { h1, MiniHTM } from "@minihtm/node"
@@ -19,28 +51,10 @@ const generated = h1("Hello, world!")
 fs.writeFileSync("generated.html", generated)
 ```
 
-```html
-<h1>Hello, world!</h1>
-```
+### Full example
 
-**Console-logging, dead simple**
+**Console logging**
 ```javascript
-import fs from "fs"
-import { h1, MiniHTM } from "@minihtm/node"
-
-MiniHTM.config({})
-
-const generated = h1("Hello, world!")
-console.log(generated)
-```
-
-```html
-<h1>Hello, world!</h1>
-```
-
-**Console-logging, formatted (1)**
-```javascript
-import fs from "fs"
 import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
 
 MiniHTM.config({})
@@ -56,79 +70,7 @@ const generated =
 console.log(generated)
 ```
 
-```html
-<html>
-
-<head>
-    <title>Example</title>
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-</body>
-
-</html>
-```
-
-**Console-logging, formatted (2)**
-```javascript
-import fs from "fs"
-import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
-
-MiniHTM.config({
-    format: true,
-})
-
-const generated =
-    html([
-        headSection("Example"),
-        body(
-            h1("Hello, world!"),
-        ),
-    ])
-
-console.log(generated)
-```
-
-```html
-<html>
-
-<head>
-    <title>Example</title>
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-</body>
-
-</html>
-```
-
-**Console-logging, unformatted**
-```javascript
-import fs from "fs"
-import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
-
-MiniHTM.config({
-    format: false,
-})
-
-const generated =
-    html([
-        headSection("Example"),
-        body(
-            h1("Hello, world!"),
-        ),
-    ])
-
-console.log(generated)
-```
-
-```html
-<html><head><title>Example</title></head><body><h1>Hello, world!</h1></body></html>
-```
-
-**File-writing, formatted (1)**
+**File writing**
 ```javascript
 import fs from "fs"
 import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
@@ -144,76 +86,4 @@ const generated =
     ])
 
 fs.writeFileSync("generated.html", generated)
-```
-
-```html
-<html>
-
-<head>
-    <title>Example</title>
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-</body>
-
-</html>
-```
-
-**File-writing, formatted (2)**
-```javascript
-import fs from "fs"
-import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
-
-MiniHTM.config({
-    format: true,
-})
-
-const generated =
-    html([
-        headSection("Example"),
-        body(
-            h1("Hello, world!"),
-        ),
-    ])
-
-fs.writeFileSync("generated.html", generated)
-```
-
-```html
-<html>
-
-<head>
-    <title>Example</title>
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-</body>
-
-</html>
-```
-
-**File-writing, unformatted**
-```javascript
-import fs from "fs"
-import { body, h1, headSection, html, MiniHTM } from "@minihtm/node"
-
-MiniHTM.config({
-    format: false,
-})
-
-const generated =
-    html([
-        headSection("Example"),
-        body(
-            h1("Hello, world!"),
-        ),
-    ])
-
-fs.writeFileSync("generated.html", generated)
-```
-
-```html
-<html><head><title>Example</title></head><body><h1>Hello, world!</h1></body></html>
 ```
