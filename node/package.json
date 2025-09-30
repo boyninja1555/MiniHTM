@@ -22,7 +22,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "devDependencies": {
     "@types/js-beautify": "^1.14.3",
